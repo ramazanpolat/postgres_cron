@@ -25,4 +25,20 @@ $ docker build -t postgres_cron:11 .
 $ docker run -d ramazanpolat/postgres_cron:11
 ```
 
+# Testing pg_cron
 
+```sh
+$ docker exec --it [container-id] bash
+$ su - postgres
+$ psql
+psql$ CREATE TABLE public.cron_test(a int);
+psql$ INSERT INTO public.cron_test values (1), (2), (3) RETURNING *;
+psql$ SELECT * FROM public.cron_test;
+# Will return 1,2,3
+psql$ select pg_sleep(60);
+psql$ INSERT INTO cron.job (schedule, command, nodename, nodeport, database, username) VALUES ('* * * * *', $$DELETE FROM public.cron_test;$$, '', 5432, 'postgres', 'postgres') RETURNING jobid;
+psql$ SELECT * FROM public.cron_test;
+# Must return nothing since we deleted it with pg_cron
+psql$ DELETE FROM cron.job;
+psql$ DROP TABLE public.cron_test;
+```
