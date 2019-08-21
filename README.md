@@ -9,6 +9,7 @@ To change database, edit `Dockerfile` line:
 
 `RUN echo "cron.database_name = '[enter-your-database-name-here]'" >> /var/lib/postgresql/data/postgresql.conf`
 
+`Dockerfile` and `docker-entrypoint.sh` files reside in [https://github.com/ramazanpolat/postgres_cron](https://github.com/ramazanpolat/postgres_cron)
 
 
 # Building image
