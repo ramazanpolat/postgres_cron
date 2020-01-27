@@ -3,9 +3,9 @@ Dockerfile for building postgresql:11 with pg_cron extension
 
 This image is derived from official [postgres:11](https://hub.docker.com/_/postgres) docker image.
 
-It comes with CitusData pg_cron extension installed for `postgres` database.
+Dockerfile installs [CitusData pg_cron extension installed](https://github.com/citusdata/pg_cron) for `postgres` database.
 
-To change database, edit `Dockerfile` line:
+To change the database for `pg_cron` to be installed, edit `Dockerfile` line:
 
 `RUN echo "cron.database_name = '[enter-your-database-name-here]'" >> /var/lib/postgresql/data/postgresql.conf`
 
