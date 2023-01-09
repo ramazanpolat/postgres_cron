@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Configure pg_cron
 
 RUN echo "shared_preload_libraries = 'pg_cron'" >> /var/lib/postgresql/data/postgresql.conf
-RUN echo "cron.database_name = '$PG_CRON_DB'" >> /var/lib/postgresql/data/postgresql.conf
+RUN echo "cron.database_name = '${PG_CRON_DB:-pg_cron}'" >> /var/lib/postgresql/data/postgresql.conf
 
 COPY ./docker-entrypoint.sh /usr/local/bin/
 
