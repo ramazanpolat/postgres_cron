@@ -1,7 +1,7 @@
 # postgres_cron
-Dockerfile for building postgresql:11 with pg_cron extension
+Dockerfile for building postgresql:15 with pg_cron extension
 
-This image is derived from official [postgres:11](https://hub.docker.com/_/postgres) docker image.
+This image is derived from official [postgres:15](https://hub.docker.com/_/postgres) docker image.
 
 Dockerfile installs [CitusData pg_cron extension installed](https://github.com/citusdata/pg_cron) for `postgres` database.
 
@@ -17,13 +17,13 @@ To change the database for `pg_cron` to be installed, edit `Dockerfile` line:
 ```sh
 $ git clone https://github.com/ramazanpolat/postgres_cron.git
 $ cd postgres_cron
-$ docker build -t postgres_cron:11 .
+$ docker build -t postgres_cron:15 .
 ```
 
 # Running image
 
 ```sh
-$ docker run -d ramazanpolat/postgres_cron:11
+$ docker run -d ramazanpolat/postgres_cron:15
 ```
 
 # Testing pg_cron
