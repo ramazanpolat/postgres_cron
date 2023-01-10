@@ -1,15 +1,15 @@
-FROM postgres:11
-MAINTAINER Michael Spitzer <professa@gmx.net>
+FROM postgres:15.1
+LABEL MAINTAINER Michael Spitzer <professa@gmx.net>
 
 #######################################################################
-# DockerHub / GitHub:
+# Source DockerHub / GitHub:
 # https://hub.docker.com/r/spitzenidee/postgresql_base/
 # https://github.com/spitzenidee/postgresql_base/
 #######################################################################
 
 #######################################################################
 # Prepare ENVs
-ENV PG_CRON_VERSION           "1.1.3"
+ENV PG_CRON_VERSION           "1.4.2"
 
 #######################################################################
 # Prepare the build requirements for the rdkit compilation:
@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Configure pg_cron
 
 RUN echo "shared_preload_libraries = 'pg_cron'" >> /var/lib/postgresql/data/postgresql.conf
-RUN echo "cron.database_name = 'postgres'" >> /var/lib/postgresql/data/postgresql.conf
+RUN echo "cron.database_name = '${PG_CRON_DB:-pg_cron}'" >> /var/lib/postgresql/data/postgresql.conf
 
 COPY ./docker-entrypoint.sh /usr/local/bin/
 
@@ -48,4 +48,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
-

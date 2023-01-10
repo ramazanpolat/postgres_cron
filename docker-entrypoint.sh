@@ -89,11 +89,11 @@ if [ "$1" = 'postgres' ]; then
 			echo
 			echo "host all all all $authMethod"
 		} >> "$PGDATA/pg_hba.conf"
-              
+
                 # Add extensions
                 echo "shared_preload_libraries = 'pg_cron'" >> $PGDATA/postgresql.conf
                 echo "cron.database_name = 'postgres'" >> $PGDATA/postgresql.conf
-              
+
 		# internal start of server in order to allow set-up using psql-client
 		# does not listen on external TCP/IP and waits until start finishes
 		PGUSER="${PGUSER:-postgres}" \
@@ -124,9 +124,9 @@ if [ "$1" = 'postgres' ]; then
 		echo
 
 		psql+=( --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" )
-                
+
                 # Create pg_cron extension
-                psql --username "$POSTGRES_USER" -c "CREATE EXTENSION pg_cron;" 
+                psql --username "$POSTGRES_USER" -c "CREATE EXTENSION pg_cron;"
 
 		echo
 		for f in /docker-entrypoint-initdb.d/*; do
